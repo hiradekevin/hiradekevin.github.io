@@ -17,18 +17,18 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  let post = getContents().find((post) => post.slug === slug);
+  const post = getContents().find((post) => post.slug === slug);
   if (!post) {
     return;
   }
 
-  let {
+  const {
     title,
     publishedAt: publishedTime,
     summary: description,
     image,
   } = post.metadata;
-  let ogImage = image
+  const ogImage = image
     ? image
     : `${baseUrl}/og?title=${encodeURIComponent(title)}`;
 
@@ -62,7 +62,7 @@ export default async function View({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  let post = getContents().find((post) => post.slug === slug);
+  const post = getContents().find((post) => post.slug === slug);
 
   if (!post) {
     notFound();
