@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `https://${process.env.CANONICAL_DOMAIN}/sitemap.xml`,
+    sitemap: `https://hiradekevin.github.io/sitemap.xml`,
   };
 }

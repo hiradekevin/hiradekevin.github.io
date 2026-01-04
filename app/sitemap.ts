@@ -1,19 +1,21 @@
-import { getContents } from '@/app/view/utils'
+import { getContents } from "@/app/view/utils";
 
-export const baseUrl = `https://${process.env.CANONICAL_DOMAIN}$`;
+export const baseUrl = `https://hiradekevin.github.io`;
 
 export const dynamic = "force-static";
 
 export default async function sitemap() {
-  const contents = getContents().map((post) => ({
-    url: `${baseUrl}/view/${post.slug}`,
-    lastModified: post.metadata.publishedAt,
-  }))
+  const contents = getContents()
+    .filter((post) => post.content.length > 0)
+    .map((post) => ({
+      url: `${baseUrl}/view/${post.slug}`,
+      lastModified: post.metadata.publishedAt,
+    }));
 
-  const routes = ['', '/view'].map((route) => ({
+  const routes = [""].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date().toISOString().split('T')[0],
-  }))
+    lastModified: new Date().toISOString().split("T")[0],
+  }));
 
-  return [...routes, ...contents]
+  return [...routes, ...contents];
 }
