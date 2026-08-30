@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -11,10 +11,10 @@ export default function Footer() {
             <Link
               rel="noopener noreferrer"
               target="_blank"
-              href="https://github.com/Hiyudev/"
+              href="https://github.com/hiradekevin"
             >
-              <ArrowUpRight size={20} />
-              github
+              <Github size={20} />
+              GitHub
             </Link>
           </Button>
         </li>

@@ -1,0 +1,6 @@
+type: Publication
+publishedAt: '2025-10-22'
+bibtex: "@conference{elensouza2025article, title = {Algoritmos para estratégias de preenchimento para tecnologias de impressão 3D manufatura aditiva (AM) / impressão 3D}, author = {Elen Beatriz Socossiuc Souza and Kevin Yuki Hirade and Ricardo Dutra da Silva and Neri Volpato and Rodrigo Minetto}, year = 2025, booktitle = {Anais do XV Seminário de Extensão e Inovação & XXX Seminário de Iniciação Científica e Tecnológica da UTFPR}, language = brazil}"
+links: 
+- type: Article
+  url: https://static.even3.com/anais/1268664.pdf?v=639231290680302819

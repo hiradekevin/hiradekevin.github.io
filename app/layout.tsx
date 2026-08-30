@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={Playfair.className}>
       <body className="antialiased flex justify-center min-h-screen">
-        <main className="flex flex-col justify-start items-center p-8 sm:p-24 lg:w-3/4 min-h-screen">
+        <main className="flex flex-col justify-start items-center p-8 sm:p-24 sm:w-3/4 xl:w-1/2 min-h-screen">
           {children}
         </main>
       </body>

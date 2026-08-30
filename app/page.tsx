@@ -1,5 +1,5 @@
 import Footer from "@/components/sections/footer";
-import { Item } from "@/components/sections/format_item";
+import { Item, News } from "@/components/sections/format_item";
 import { getContents } from "./view/utils";
 
 export default function Page() {
@@ -19,6 +19,13 @@ export default function Page() {
     );
   const works = contents
     .filter((c) => c.metadata.type == "Work")
+    .sort(
+      (a, b) =>
+        b.metadata.publishedAt.getTime() - a.metadata.publishedAt.getTime()
+    );
+
+  const news = contents
+    .filter((c) => c.metadata.type == "News")
     .sort(
       (a, b) =>
         b.metadata.publishedAt.getTime() - a.metadata.publishedAt.getTime()
@@ -48,24 +55,29 @@ export default function Page() {
         <p className="uppercase mt-4 text-xl">By Hirade K. Y.</p>
       </header>
 
-      <section className="text-justify mt-8">
+      <section className="text-justify mt-8 flex flex-col gap-2">
         <p>
-          Currently at NUFER at UTFPR as a Undergraduate Research Assistant,
-          working with the development of{" "}
-          <b>computational geometry algorithms</b> on different processes in the
-          context of <b>3D printing</b>, mainly focused on{" "}
-          <b>support structures generation algorithms</b> (for model supporting
-          process) and <b>tool paths generation algorithms</b> (for model
-          filling process).
+          Currently an Undergraduate Research Assistant at Additive Manufacturing and Tooling Group (NUFER) at the Department of Mechanical Engineering at the Federal University of Technology of Paraná (UTFPR) working with the development of{" "}
+          <b>computational geometry algorithms</b> on the light of the generation of support structures and tool paths for additive manufacturing processes.
+        </p>
+        <p>
+          Also, a volunteer at the Medical Computer Vision and Robotics Lab (MEDCVR) at the Department of Mathematical and Computational Sciences at the University of Toronto Mississauga (UTM) working with the development of <b>sim2real visual-based reinforcement learning</b> pipelines for autonomous robotic manipulation tasks.
+        </p>
+        <p>
+          Finally, a volunteer at the Department of Informatics at the Federal University of Technology of Paraná (UTFPR) working with Prof. Dr. Gustavo A. Giménez-Lugo on the <b>studies of different theories of cybernetics from different cultures</b>.
         </p>
       </section>
+
+      <p className="font-bold text-lg md:text-3xl uppercase text-center mt-10 w-full">
+        II. — Publications & Talk presentations
+      </p>
 
       <section className="w-full mt-8 text-justify">
         <h2 className="font-bold italic">Publications</h2>
 
         <ol className="list-disc">
           {publications.map((p) => (
-            <Item key={p.slug} informations={p} className={"not-last:mb-6"} />
+            <Item key={p.metadata.publishedAt.getTime()} informations={p} className={"not-last:mb-6"} />
           ))}
         </ol>
       </section>
@@ -75,10 +87,26 @@ export default function Page() {
 
         <ol className="list-disc">
           {presentations.map((p) => (
-            <Item key={p.slug} informations={p} className={"not-last:mb-6"} />
+            <Item key={p.metadata.publishedAt.getTime()} informations={p} className={"not-last:mb-6"} />
           ))}
         </ol>
       </section>
+
+      <p className="font-bold text-lg md:text-3xl uppercase text-center mt-10 w-full">
+        III. — News
+      </p>
+
+      <section className="w-full mt-8 text-justify">
+        <ol className="list-none">
+          {news.map((p) => (
+            <News key={p.metadata.publishedAt.getTime()} informations={p} className={"not-last:mb-6"} />
+          ))}
+        </ol>
+      </section>
+
+      <p className="font-bold text-lg md:text-3xl uppercase text-center mt-10 w-full">
+        IV. — Miscellaneous
+      </p>
 
       <section className="w-full mt-8 text-justify">
         <h2 className="font-bold italic">Academic projects</h2>
@@ -90,7 +118,7 @@ export default function Page() {
 
         <ol className="list-disc">
           {works.map((p) => (
-            <Item key={p.slug} informations={p} className={"not-last:mb-6"} />
+            <Item key={p.metadata.publishedAt.getTime()} informations={p} className={"not-last:mb-6"} />
           ))}
         </ol>
       </section>

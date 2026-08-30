@@ -1,25 +1,23 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
 import { Cite } from "@citation-js/core";
 import "@citation-js/plugin-bibtex";
 import "@citation-js/plugin-doi";
 import "@citation-js/plugin-csl";
+import { load } from "js-yaml";
 
-type Metadata = {
+export type Metadata = {
   type: string;
-  title: string;
   publishedAt: Date;
-  summary: string;
+  summary?: string;
   bibliography?: string;
-  image?: string;
+  links?: Record<string, string>[];
 };
 
-function parseFrontmatter(fileContent: string) {
-  const frontmatter_data = matter(fileContent);
-  const metadata: Metadata = structuredClone(frontmatter_data.data) as Metadata;
+function parseFrontmatter(yamlContent: object) {
+  const data = yamlContent as Record<string, any>;
 
-  const bibtex = frontmatter_data.data["bibtex"];
+  const bibtex = data.bibtex || "";
   const cite = new Cite(bibtex);
   let output = cite.format("bibliography", {
     format: "html",
@@ -27,72 +25,39 @@ function parseFrontmatter(fileContent: string) {
     lang: "en-US",
   });
   output = output.replaceAll(/(Hirade\, K\. Y\.)/gm, "<u><b>$1</b></u>");
-  metadata["bibliography"] = output;
 
-  const regex = /(\d{4})-(\d{2})-(\d{2})/;
-  const [, year, month, day] =
-    frontmatter_data.data["publishedAt"].match(regex);
-  const date = new Date(year, month - 1, day);
-  metadata["publishedAt"] = date;
+  const metadata: Metadata = {
+    type: data.type,
+    publishedAt: new Date(data.publishedAt),
+    summary: data.summary || "",
+    bibliography: output,
+    links: data.links || [],
+  };
 
-  const content = frontmatter_data.content;
-  return { metadata: metadata as Metadata, content };
+  return { metadata };
 }
 
-function getMDXFiles(dir: string) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".mdx");
+function getYAMLFiles(dir: string) {
+  return fs.readdirSync(dir).filter((file) => path.extname(file) === ".yaml");
 }
 
-function readMDXFile(filePath: string) {
+function readYAMLFile(filePath: string) {
   const rawContent = fs.readFileSync(filePath, "utf-8");
-  return parseFrontmatter(rawContent);
+  const yamlContent = load(rawContent) as object;
+  return parseFrontmatter(yamlContent);
 }
 
-function getMDXData(dir: string) {
-  const mdxFiles = getMDXFiles(dir);
-  return mdxFiles.map((file) => {
-    const { metadata, content } = readMDXFile(path.join(dir, file));
-    const slug = path.basename(file, path.extname(file));
+function getYAMLData(dir: string) {
+  const yamlFiles = getYAMLFiles(dir);
+  return yamlFiles.map((file) => {
+    const { metadata } = readYAMLFile(path.join(dir, file));
 
     return {
       metadata,
-      slug,
-      content,
     };
   });
 }
 
 export function getContents() {
-  return getMDXData(path.join(process.cwd(), "app", "view", "contents"));
-}
-
-export function formatDate(targetDate: Date, includeRelative = false) {
-  const currentDate = new Date();
-  const yearsAgo = currentDate.getFullYear() - targetDate.getFullYear();
-  const monthsAgo = currentDate.getMonth() - targetDate.getMonth();
-  const daysAgo = currentDate.getDate() - targetDate.getDate();
-
-  let formattedDate = "";
-
-  if (yearsAgo > 0) {
-    formattedDate = `${yearsAgo}y ago`;
-  } else if (monthsAgo > 0) {
-    formattedDate = `${monthsAgo}mo ago`;
-  } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`;
-  } else {
-    formattedDate = "Today";
-  }
-
-  const fullDate = targetDate.toLocaleString("en-us", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
-
-  if (!includeRelative) {
-    return fullDate;
-  }
-
-  return `${fullDate} (${formattedDate})`;
+  return getYAMLData(path.join(process.cwd(), "app", "view", "contents"));
 }

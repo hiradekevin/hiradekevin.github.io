@@ -1,0 +1,6 @@
+type: Work
+publishedAt: '2025-11-03'
+bibtex: "@misc{hiradepicinin2025, author = {Kevin Yuki Hirade and Luiz Guilherme Picinin}, title = {Análise dos Teoremas da Incompletude sob o olhar epistemológico de Thomas Kuhn}, institution = {Federal University of Technology Paraná (UTFPR)}, year = 2025, language = brazil}"
+links: 
+- type: Article
+  url: /assets/ti2.pdf
