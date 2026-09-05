@@ -11,10 +11,11 @@ export type Metadata = {
   publishedAt: Date;
   summary?: string;
   bibliography?: string;
+  bibtex?: string;
   links?: Record<string, string>[];
 };
 
-function parseFrontmatter(yamlContent: object) {
+function parseYAMLContent(yamlContent: object) {
   const data = yamlContent as Record<string, any>;
 
   const bibtex = data.bibtex || "";
@@ -31,6 +32,7 @@ function parseFrontmatter(yamlContent: object) {
     publishedAt: new Date(data.publishedAt),
     summary: data.summary || "",
     bibliography: output,
+    bibtex: bibtex,
     links: data.links || [],
   };
 
@@ -44,7 +46,7 @@ function getYAMLFiles(dir: string) {
 function readYAMLFile(filePath: string) {
   const rawContent = fs.readFileSync(filePath, "utf-8");
   const yamlContent = load(rawContent) as object;
-  return parseFrontmatter(yamlContent);
+  return parseYAMLContent(yamlContent);
 }
 
 function getYAMLData(dir: string) {
