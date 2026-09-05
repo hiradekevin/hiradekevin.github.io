@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<center>
 
-## Getting Started
+[![pnpm](https://img.shields.io/badge/pnpm-12-orange.svg)](https://pnpm.io/)
+[![Node.js](https://img.shields.io/badge/Node.js-v24-green.svg)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-v19-blue.svg)](https://react.dev/)
+[![Next.js](https://img.shields.io/badge/Next.js-v16-black.svg)](https://nextjs.org/)
 
-First, run the development server:
+**Portfolio**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+A semester review of academic publications and works
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+</center>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Prerequisites
+- pnpm v12
+- Node.js v24
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**pnpm v12**
+- [Follow official pnpm step by step tutorial to properly install pnpm](https://pnpm.io/installation)
 
-## Learn More
+**node.js v24**
+- [Use pnpm runtime command line to install node.js version 24](https://pnpm.io/cli/runtime)
 
-To learn more about Next.js, take a look at the following resources:
+# Installation
+1. Clone the project executing `git clone https://github.com/hiradekevin/hiradekevin.github.io.git`
+2. Install all the dependencies executing `pnpm i`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Project
+1. Run the development server by executing `pnpm dev`
+2. Open `http://localhost:3000` with your browser to see the website.
