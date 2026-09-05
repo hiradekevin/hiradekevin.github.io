@@ -19,7 +19,7 @@ export default function Footer() {
           </Button>
         </li>
       </ul>
-      <p className="mt-8">© {new Date().getFullYear()} MIT Licensed</p>
+      <p className="mt-8">© {new Date().getFullYear()} CC BY-NC-SA 4.0 Licensed</p>
     </footer>
   );
 }
